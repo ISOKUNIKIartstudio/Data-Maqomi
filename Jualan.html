@@ -3,57 +3,303 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>TUKUGAWA isokuniki- Jualan via WA</title>
-  <!-- Favicon (ganti URL dengan logo Anda) -->
-  <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=FILE_ID_LOGO&sz=64">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <title>TukuGawa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-    body { background: #f5f7fb; padding: 20px; }
-    .container { max-width: 500px; margin: 0 auto; }
-    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-    .logo-toko { width: 40px; height: 40px; object-fit: contain; border-radius: 12px; }
-    .sub { color: #6c7a8e; margin-bottom: 24px; font-size: 14px; }
-    .card { background: white; border-radius: 24px; padding: 16px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 16px; align-items: center; transition: 0.2s; }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-    .product-img { width: 80px; height: 80px; object-fit: cover; border-radius: 16px; background: #eef2f6; }
-    .img-placeholder { width: 80px; height: 80px; background: #eef2f6; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #8e9aaf; font-size: 12px; }
-    .info { flex: 1; }
-    .nama-produk { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
-    .harga { color: #2d6a4f; font-weight: 700; font-size: 16px; margin: 4px 0; }
-    .btn-order { background: #25D366; border: none; padding: 8px 16px; border-radius: 40px; color: white; font-weight: 600; cursor: pointer; font-size: 14px; transition: 0.2s; }
-    .btn-order:hover { background: #128C7E; }
-    .cart-icon { position: fixed; bottom: 20px; right: 20px; background: #1e293b; width: 56px; height: 56px; border-radius: 28px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.2); cursor: pointer; z-index: 100; }
-    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; visibility: hidden; z-index: 1000; }
-    .modal-content { background: white; width: 90%; max-width: 450px; border-radius: 32px; padding: 24px; max-height: 80vh; overflow-y: auto; }
-    .cart-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; gap: 8px; }
+    body { background: #e8f0e8; padding: 16px; min-height: 100vh; }
+    .container { max-width: 600px; margin: 0 auto; }
+    
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #1a4d2e, #2d6a4f);
+      border-radius: 24px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(26, 77, 46, 0.3);
+    }
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .logo-toko { width: 69px; height: 68px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 45px; }
+    .header h1 { color: #f5f0e8; font-size: 33px; font-weight: 700; }
+    .header h1 span { color: #c9a84c; }
+    .sub { color: #d4e0d4; font-size: 14px; margin-top: 4px; }
+    
+    /* GRID PRODUK */
+    .produk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 14px 12px 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border: 1px solid #d4e0d4;
+      transition: 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(26, 77, 46, 0.15); }
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #eef2f0;
+      margin-bottom: 10px;
+    }
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #eef2f0;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8e9a8e;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .nama-produk { font-weight: 600; font-size: 19px; color: #1a3a2a; margin-bottom: 4px; min-height: 38px; line-height: 1.3; }
+    .harga { color: #1a4d2e; font-weight: 700; font-size: 16px; margin: 6px 0 10px; }
+    .harga .satuan { font-weight: 400; font-size: 13px; color: #5a7a6a; }
+    .btn-order {
+      background: #25D366;
+      border: none;
+      padding: 10px 0;
+      width: 100%;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-order:hover { background: #128C7E; transform: scale(1.02); }
+    
+    /* KERANJANG */
+    .cart-icon {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #dc2626;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+      cursor: pointer;
+      z-index: 100;
+      border: 3px solid white;
+      transition: 0.2s;
+    }
+    .cart-icon:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(220, 38, 38, 0.7); }
+    .cart-icon svg { width: 32px; height: 32px; fill: none; stroke: white; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .cart-icon span {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: green;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+    
+    /* MODAL */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      width: 92%;
+      max-width: 450px;
+      border-radius: 32px;
+      padding: 24px;
+      max-height: 85vh;
+      overflow-y: auto;
+      border: 2px solid #2d6a4f;
+    }
+    .modal-content h3 { color: #1a4d2e; font-size: 22px; margin-bottom: 12px; }
+    .cart-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #e0ebe0;
+      gap: 8px;
+    }
     .item-info { flex: 2; }
-    .item-name { font-weight: 600; }
+    .item-name { font-weight: 600; color: #1a3a2a; }
     .item-price { font-size: 14px; color: #2d6a4f; }
-    .item-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .item-qty { width: 70px; padding: 6px; border: 1px solid #ccc; border-radius: 12px; text-align: center; }
-    .item-satuan { font-size: 12px; color: #6c7a8e; }
-    .btn-remove { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 12px; }
-    .btn-remove:hover { background: #dc2626; }
-    .total-row { font-weight: 700; font-size: 18px; margin-top: 12px; text-align: right; }
-    input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 16px; margin: 8px 0; font-size: 14px; }
-    .submit-wa { background: #25D366; color: white; border: none; padding: 12px; width: 100%; border-radius: 40px; font-weight: bold; margin-top: 16px; cursor: pointer; }
-    .close-modal { background: #ccc; border: none; padding: 10px; border-radius: 40px; width: 100%; margin-top: 8px; cursor: pointer; }
-    hr { margin: 12px 0; }
-    .error-msg { color: red; text-align: center; padding: 20px; }
+    .item-controls { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .item-qty {
+      width: 64px;
+      padding: 6px;
+      border: 1px solid #bcd0bc;
+      border-radius: 12px;
+      text-align: center;
+      background: #f5faf5;
+    }
+    .btn-remove {
+      background: #d94545;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .btn-remove:hover { background: #b33232; }
+    .total-row { font-weight: 700; font-size: 20px; margin-top: 16px; text-align: right; color: #1a4d2e; }
+    
+    /* FORM */
+    input, textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #bcd0bc;
+      border-radius: 16px;
+      margin: 8px 0;
+      font-size: 15px;
+      background: #fafcfa;
+    }
+    input:focus, textarea:focus {
+      border-color: #2d6a4f;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+    }
+    input[readonly] { background: #eef4ee; color: #2d4a3a; cursor: not-allowed; }
+    .submit-wa {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .submit-wa:hover { background: #128C7E; }
+    .close-modal {
+      background: #d4e0d4;
+      color: #1a3a2a;
+      border: none;
+      padding: 12px;
+      border-radius: 40px;
+      width: 100%;
+      margin-top: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .close-modal:hover { background: #bcd0bc; }
+    hr { margin: 14px 0; border: 0; border-top: 2px solid #e0ebe0; }
+    .reset-wa {
+      background: none;
+      border: none;
+      color: #2d6a4f;
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .wa-wrapper { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .wa-wrapper input { flex: 1; }
+    
+    /* STATUS */
+    .loading-msg {
+      text-align: center;
+      padding: 40px 20px;
+      grid-column: 1/-1;
+      color: #2d6a4f;
+      font-size: 16px;
+    }
+    .error-msg {
+      color: #b33232;
+      text-align: center;
+      padding: 20px;
+      grid-column: 1/-1;
+      background: #fef2f2;
+      border-radius: 12px;
+      border: 1px solid #fca5a5;
+    }
+    .spinner {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #d4e0d4;
+      border-top: 3px solid #2d6a4f;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
 <div class="container">
-  <h1>
-    <img class="logo-toko" src="https://drive.google.com/thumbnail?id=1-BHxv84qAAc9XSbiG-dPpkgKnACY71pW&sz=80" alt="Logo Toko" onerror="this.style.display='none'">
-    TUKUGAWA isokuniki
-  </h1>
-  <div class="sub">Belanja mudah 🔥pesan via WA</div>
-  <div id="produk-list"></div>
-</div>
-<div class="cart-icon" id="cartBtn">🛒 <span id="cartCount">0</span></div>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-toko">🌏</div>
+      <div>
+        <h1><span>Tuku</span>Gawa</h1>
+        <div class="sub">🛒 Belanja mudah, berkah insya Alloh</div>
+      </div>
+    </div>
+    <div style="font-size:45px;">🤲</div>
+  </div>
 
+  <!-- PRODUK LIST -->
+  <div id="produk-list" class="produk-grid">
+    <div class="loading-msg">
+      <div class="spinner"></div><br>
+      ⏳ Memuat produk...
+    </div>
+  </div>
+</div>
+
+<!-- KERANJANG -->
+<div class="cart-icon" id="cartBtn">
+  <svg viewBox="0 0 24 24">
+    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <path d="M16 10a4 4 0 0 1-8 0"/>
+  </svg>
+  <span id="cartCount">0</span>
+</div>
+
+<!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <h3>🛒 Keranjang Belanja</h3>
@@ -61,7 +307,10 @@
     <div class="total-row" id="totalHargaModal">Total: Rp 0</div>
     <hr>
     <input type="text" id="nama" placeholder="Nama lengkap" required>
-    <input type="tel" id="noWa" placeholder="Nomor WhatsApp (contoh: 62812xxxx)" required>
+    <div class="wa-wrapper">
+      <input type="tel" id="noWa" placeholder="Nomor WhatsApp (contoh: 62812xxxx)" required>
+      <button class="reset-wa" id="resetWa">↺ Reset</button>
+    </div>
     <textarea id="alamat" rows="2" placeholder="Alamat pengiriman"></textarea>
     <textarea id="catatan" rows="2" placeholder="Catatan tambahan (opsional)"></textarea>
     <button class="submit-wa" id="submitOrder">✅ Kirim Pesanan via WA</button>
@@ -70,50 +319,87 @@
 </div>
 
 <script>
+  // ============================================================
+  // KONFIGURASI - GANTI DENGAN DATA ANDA
+  // ============================================================
+  const API_URL = "https://script.google.com/macros/s/AKfycby6jHJVNuLsQeRzpdUJBsSkD-N_sKidgvk089LOSM87pHM_1PfMRRJ83bZXvOIoRMtdPw/exec";
+  const ADMIN_NO = "628123456789"; // GANTI DENGAN NOMOR WA ANDA
+
+  // ============================================================
   let produkData = [];
   let cart = [];
 
-  // GANTI URL INI dengan Web App URL Anda yang baru
-  const API_URL = "https://script.google.com/macros/s/AKfycbycx9WuX-RI-o2vCfzMPwm_UM3B54ESo_XkLBjrOExc7wg7B2JlmtY5jEsjDDUQt7Nypg/exec";
-
+  // ============================================================
+  // LOAD PRODUK
+  // ============================================================
   async function loadProduk() {
+    const container = document.getElementById("produk-list");
+    
     try {
+      console.log("📡 Fetching:", API_URL);
       const res = await fetch(API_URL);
+      
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      
       const data = await res.json();
+      console.log("📦 Data:", data);
+      
       if (data.error) throw new Error(data.error);
+      
+      if (!data || !data.length) {
+        container.innerHTML = `<div class="error-msg">⚠️ Belum ada produk. Isi spreadsheet dulu.</div>`;
+        return;
+      }
+      
       produkData = data;
       renderProduk();
-    } catch(e) {
-      document.getElementById("produk-list").innerHTML = `<p class="error-msg">❌ Gagal memuat produk. Periksa URL API.</p>`;
+      
+    } catch(error) {
+      console.error("❌ Error:", error);
+      container.innerHTML = `
+        <div class="error-msg">
+          ❌ Gagal memuat produk<br>
+          <small>${error.message}</small><br>
+          <small style="font-size:12px; color:#6c7a8e;">URL: ${API_URL}</small><br>
+          <button onclick="loadProduk()" style="margin-top:12px; padding:10px 24px; border-radius:40px; border:none; background:#2d6a4f; color:white; cursor:pointer; font-weight:600;">
+            🔄 Coba Lagi
+          </button>
+        </div>
+      `;
     }
   }
 
+  // ============================================================
+  // RENDER PRODUK
+  // ============================================================
   function renderProduk() {
     const container = document.getElementById("produk-list");
-    if (!produkData.length) {
-      container.innerHTML = "<p>Belum ada produk.</p>";
-      return;
-    }
-    container.innerHTML = produkData.map(p => `
-      <div class="card">
-        ${p.gambar ? `<img class="product-img" src="${p.gambar}" alt="${p.nama}" onerror="this.style.display='none'">` : `<div class="img-placeholder">📷</div>`}
-        <div class="info">
+    
+    container.innerHTML = produkData.map(p => {
+      const hasImage = p.gambar && typeof p.gambar === 'string' && p.gambar.startsWith('http');
+      
+      return `
+        <div class="card">
+          ${hasImage ? `<img class="product-img" src="${p.gambar}" alt="${p.nama}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : `<div class="img-placeholder">📷</div>`}
+          ${hasImage ? `<div class="img-placeholder" style="display:none;">📷</div>` : ''}
           <div class="nama-produk">${escapeHtml(p.nama)}</div>
-          <div class="harga">Rp ${p.harga.toLocaleString()} / <span class="satuan-produk">${escapeHtml(p.satuan)}</span></div>
-          <button class="btn-order" data-id="${p.id}" data-nama="${escapeHtml(p.nama)}" data-harga="${p.harga}" data-satuan="${escapeHtml(p.satuan)}">➕ Keranjang</button>
+          <div class="harga">Rp ${Number(p.harga).toLocaleString()} <span class="satuan">/ ${escapeHtml(p.satuan || 'pcs')}</span></div>
+          <button class="btn-order" data-id="${p.id}" data-nama="${escapeHtml(p.nama)}" data-harga="${p.harga}" data-satuan="${escapeHtml(p.satuan || 'pcs')}">➕ Beli</button>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
+
     document.querySelectorAll('.btn-order').forEach(btn => {
-      btn.removeEventListener('click', handleAddToCart);
       btn.addEventListener('click', handleAddToCart);
     });
   }
 
+  // ============================================================
+  // KERANJANG
+  // ============================================================
   function handleAddToCart(e) {
     const btn = e.currentTarget;
-    const id = parseInt(btn.dataset.id);
+    const id = btn.dataset.id;
     const nama = btn.dataset.nama;
     const harga = parseInt(btn.dataset.harga);
     const satuan = btn.dataset.satuan;
@@ -126,23 +412,24 @@
     }
     updateCartCount();
     animateCart();
+    if (navigator.vibrate) navigator.vibrate(20);
   }
 
   function animateCart() {
-    const cartIcon = document.getElementById("cartBtn");
-    cartIcon.style.transform = "scale(1.1)";
-    setTimeout(() => { cartIcon.style.transform = "scale(1)"; }, 200);
+    const el = document.getElementById("cartBtn");
+    el.style.transform = "scale(1.2)";
+    setTimeout(() => el.style.transform = "scale(1)", 200);
   }
 
   function updateCartCount() {
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById("cartCount").innerText = totalItems;
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById("cartCount").innerText = total;
   }
 
   function renderCartModal() {
     const container = document.getElementById("cartItemsList");
     if (cart.length === 0) {
-      container.innerHTML = "<p style='text-align:center; padding:16px;'>Keranjang masih kosong</p>";
+      container.innerHTML = "<p style='text-align:center; padding:16px;'>Keranjang kosong</p>";
       document.getElementById("totalHargaModal").innerHTML = "Total: Rp 0";
       return;
     }
@@ -159,9 +446,9 @@
             <div class="item-price">Rp ${item.harga.toLocaleString()} / ${escapeHtml(item.satuan)}</div>
           </div>
           <div class="item-controls">
-            <input type="number" class="item-qty" value="${item.quantity}" min="1" data-idx="${idx}" style="width:70px;">
+            <input type="number" class="item-qty" value="${item.quantity}" min="1" data-idx="${idx}">
             <span class="item-satuan">${escapeHtml(item.satuan)}</span>
-            <button class="btn-remove" data-idx="${idx}">Hapus</button>
+            <button class="btn-remove" data-idx="${idx}">✕</button>
           </div>
           <div style="width:100%; text-align:right; font-size:14px;">Subtotal: Rp ${subtotal.toLocaleString()}</div>
         </div>
@@ -173,9 +460,9 @@
     document.querySelectorAll('.item-qty').forEach(input => {
       input.addEventListener('change', (e) => {
         const idx = parseInt(e.target.dataset.idx);
-        let newQty = parseInt(e.target.value);
-        if (isNaN(newQty) || newQty < 1) newQty = 1;
-        cart[idx].quantity = newQty;
+        let val = parseInt(e.target.value);
+        if (isNaN(val) || val < 1) val = 1;
+        cart[idx].quantity = val;
         renderCartModal();
         updateCartCount();
       });
@@ -192,9 +479,42 @@
     });
   }
 
+  // ============================================================
+  // WA NUMBER (LocalStorage)
+  // ============================================================
+  function loadWaNumber() {
+    try {
+      const saved = localStorage.getItem('waNumber');
+      const input = document.getElementById('noWa');
+      if (saved && saved.length > 5) {
+        input.value = saved;
+        input.readOnly = true;
+      }
+    } catch(e) {}
+  }
+
+  function saveWaNumber(number) {
+    try {
+      if (number && number.length > 5) {
+        localStorage.setItem('waNumber', number);
+        document.getElementById('noWa').readOnly = true;
+      }
+    } catch(e) {}
+  }
+
+  function resetWaNumber() {
+    localStorage.removeItem('waNumber');
+    document.getElementById('noWa').value = '';
+    document.getElementById('noWa').readOnly = false;
+    document.getElementById('noWa').focus();
+  }
+
+  // ============================================================
+  // UTILITY
+  // ============================================================
   function escapeHtml(str) {
     if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
+    return String(str).replace(/[&<>]/g, function(m) {
       if (m === '&') return '&amp;';
       if (m === '<') return '&lt;';
       if (m === '>') return '&gt;';
@@ -202,22 +522,31 @@
     });
   }
 
+  // ============================================================
+  // EVENT LISTENER
+  // ============================================================
+  document.getElementById('resetWa').addEventListener('click', resetWaNumber);
+
   document.getElementById("cartBtn").onclick = () => {
     renderCartModal();
     document.getElementById("modal").style.visibility = "visible";
   };
+
   document.getElementById("closeModal").onclick = () => {
     document.getElementById("modal").style.visibility = "hidden";
   };
 
   document.getElementById("submitOrder").onclick = async () => {
     const nama = document.getElementById("nama").value.trim();
-    const noWa = document.getElementById("noWa").value.trim();
+    let noWa = document.getElementById("noWa").value.trim();
     const alamat = document.getElementById("alamat").value.trim();
     const catatan = document.getElementById("catatan").value.trim();
 
-    if (!nama || !noWa) { alert("Harap isi nama dan nomor WhatsApp."); return; }
+    if (!nama) { alert("Harap isi nama lengkap."); return; }
+    if (!noWa) { alert("Harap isi nomor WhatsApp."); return; }
     if (cart.length === 0) { alert("Keranjang kosong."); return; }
+
+    saveWaNumber(noWa);
 
     let detailPesanan = "";
     let total = 0;
@@ -226,11 +555,9 @@
       total += subtotal;
       detailPesanan += `${item.nama} (${item.quantity} ${item.satuan}) = Rp ${subtotal.toLocaleString()}\n`;
     });
-    
-    let pesan = `Halo, saya ${nama} ingin memesan:\n${detailPesanan}\nTotal: Rp ${total.toLocaleString()}\nAlamat: ${alamat}`;
-    if (catatan) pesan += `\nCatatan: ${catatan}`;
-    
-    const waLink = `https://wa.me/${noWa.replace(/^0/, '62')}?text=${encodeURIComponent(pesan)}`;
+
+    const pesanPembeli = `Halo, saya ${nama} ingin memesan:\n${detailPesanan}\nTotal: Rp ${total.toLocaleString()}\nAlamat: ${alamat}${catatan ? `\nCatatan: ${catatan}` : ''}\n\n📱 Silakan konfirmasi pesanan ke admin: wa.me/${ADMIN_NO}`;
+    const waLink = `https://wa.me/${noWa.replace(/^0/, '62')}?text=${encodeURIComponent(pesanPembeli)}`;
 
     try {
       await fetch(API_URL, {
@@ -239,20 +566,24 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nama, noWa, detailPesanan, total, catatan, alamat })
       });
-    } catch(e) { console.warn("Gagal simpan ke spreadsheet"); }
+    } catch(e) { console.warn("Gagal simpan ke spreadsheet:", e); }
 
     window.open(waLink, "_blank");
-    alert("Pesanan siap. Silakan lanjutkan chat di WhatsApp.");
-    
+    alert("✅ Pesanan siap. Silakan lanjutkan chat di WhatsApp.\nAdmin akan segera merespon.");
+
     cart = [];
     updateCartCount();
     document.getElementById("modal").style.visibility = "hidden";
     document.getElementById("nama").value = "";
-    document.getElementById("noWa").value = "";
     document.getElementById("alamat").value = "";
     document.getElementById("catatan").value = "";
   };
 
+  // ============================================================
+  // START
+  // ============================================================
+  console.log("🚀 Aplikasi TukuGawa dimulai");
+  loadWaNumber();
   loadProduk();
 </script>
 </body>
